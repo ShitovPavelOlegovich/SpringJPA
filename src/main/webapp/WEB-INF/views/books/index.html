@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+<div th:each="book : ${books}">
+    <a th:href="@{/books/{id}(id=${book.getId()})}"
+       th:text="${book.getTitle()} + ', ' + ${book.getAuthor()} + ', '
+            + ${book.getYear()}">value</a>
+</div>
+<div>
+    <a th:if="${books.hasPrevious()}" th:href="@{/books(page=${books.number - 1})}">Предыдущая страница</a>
+    <br/>
+    <span th:text="${books.number}"></span>
+    <br/>
+    <a th:if="${books.hasNext()}" th:href="@{/books(page=${books.number + 1})}">Следующая страница</a>
+</div>
+<br/>
+<hr/>
+<a href="/books/new">Create new Books</a>
+</body>
+</html>
